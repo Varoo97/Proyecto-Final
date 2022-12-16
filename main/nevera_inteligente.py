@@ -8,6 +8,12 @@ from PIL import Image
 import webbrowser
 import urllib.request
 
+
+st.sidebar.header('¡NUNCA COCINAR FUE TAN FÁCIL!')
+st.sidebar.image(Image.open('nevera.png'))
+st.sidebar.info("Si necesitas más información, puedes contactar con nosotros a través de nuestra dirección de correo 'laneverainteligente@gmail.com'")
+st.sidebar.image('https://cdn-images-1.medium.com/max/1200/1*69RcxrWXuk385lSxkIYYLA.png', width=100)
+uploaded_file = st.sidebar.file_uploader("Sube tu receta", type=["txt."])
 df = px.data.iris()
 
 @st.experimental_memo
@@ -52,7 +58,6 @@ import pandas as pd
 
 
 recetas = pd.read_csv('../recetas_uno.csv')
-
 df = pd.read_csv('../recetas.csv')
 
 st.title('LA NEVERA INTELIGENTE')
@@ -71,7 +76,6 @@ st.caption('### Para más información')
 url = 'https://fr.monsieur-cuisine.com/es/recetas'
 if st.button('Monsieur Cuisine Web'):
     webbrowser.open_new_tab(url)
-
 
 
 
@@ -114,8 +118,29 @@ elif len(re) == 4:
     re.append('Dificultad')
     re.append('link_recetas')
     st.dataframe(df[re][(df[re][re[0]] == 1) & (df[re][re[1]] == 1) & (df[re][re[2]] == 1) & (df[re][re[3]] == 1)]     [['Título','Duración','Dificultad','link_recetas']])
-    
 
+
+
+
+
+
+dificultad = st.selectbox('Filtrar Dificultad', df.Dificultad.unique())
+
+
+col1, col2, col3 = st.columns([1,1,1])
+
+with col2:
+    url = 'https://fr.monsieur-cuisine.com/es/recipe/berenjenas-al-parmesano'
+    boton=st.button('Enlace a la receta')
+    if boton:
+        webbrowser.open_new_tab(url)
+    
+st.image('comidagif.gif')    
+
+st.text('')
+st.text('')
+st.text('')
+st.text('')
 st.caption('# Siguientes pasos del proyecto')
 st.write('Filtrar por tipo de alimento y valores nutricionales')
 st.write('Realizar el mismo proceso, pero añadiendole reconocimiento de imagenes')
